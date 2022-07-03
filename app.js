@@ -20,10 +20,10 @@ const promptUser = () => {
             type: "input",
             name: "name",
             message: "What's your name? (Required)",
-            validate: nameInput =>{
-                if(nameInput){
+            validate: nameInput => {
+                if (nameInput) {
                     return true;
-                } else{
+                } else {
                     console.log("You need to enter a valid name.");
                     return false;
                 }
@@ -33,19 +33,33 @@ const promptUser = () => {
             type: "input",
             name: "github",
             message: "What's your GitHub username? (Required)",
-            validate: usernameInput =>{
-                if(usernameInput){
+            validate: usernameInput => {
+                if (usernameInput) {
                     return true;
-                } else{
+                } else {
                     console.log("You need to enter a valid name.");
                     return false;
                 }
             }
         },
         {
+            type: "confirm",
+            name: "confirmAbout",
+            message: "Would you like to enter some information about yourself for an 'About' section?",
+            default: true
+        },
+        {
             type: "input",
             name: "about",
-            message: "Tell me a little about yourself."
+            message: "Tell me a little about yourself.",
+            when: ({ confirmAbout }) => { //what's happening here? Why is it in ({})? And why have it show up after the input?
+                //  the when method to conditionally prompt a question based on the user's input.
+                if (confirmAbout) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
     ]);
     // .then(answers => console.log(answers));
@@ -63,10 +77,10 @@ const promptProject = portfolioData => {
             type: "input",
             name: "name",
             message: "What's your project name? (Required)",
-            validate: projectNameInput =>{
-                if(projectNameInput){
+            validate: projectNameInput => {
+                if (projectNameInput) {
                     return true;
-                } else{
+                } else {
                     console.log("You need to enter a valid name.");
                     return false;
                 }
@@ -76,10 +90,10 @@ const promptProject = portfolioData => {
             type: "input",
             name: "description",
             message: "What's your project about? (Required)",
-            validate: projectDescInput =>{
-                if(projectDescInput){
+            validate: projectDescInput => {
+                if (projectDescInput) {
                     return true;
-                } else{
+                } else {
                     console.log("You need to enter a valid name.");
                     return false;
                 }
@@ -95,10 +109,10 @@ const promptProject = portfolioData => {
             type: "input",
             name: "link",
             message: "Enter the GitHub link to your project. (Required)",
-            validate: projectLinkInput =>{
-                if(projectLinkInput){
+            validate: projectLinkInput => {
+                if (projectLinkInput) {
                     return true;
-                } else{
+                } else {
                     console.log("You need to enter a valid name.");
                     return false;
                 }
