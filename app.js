@@ -1,4 +1,4 @@
-const inquirer=require('inquirer');
+const inquirer = require('inquirer');
 
 // const fs = require('fs');
 // const generatePage = require("./src/page-template.js");
@@ -14,15 +14,79 @@ const inquirer=require('inquirer');
 //     console.log("Portfolio complete!");
 // });
 
-inquirer
-    .prompt([
+const promptUser = () => {
+    return inquirer.prompt([
         {
-            type:"input",
-            name:"name",
-            message:"What's your name?"
-    
+            type: "input",
+            name: "name",
+            message: "What's your name?"
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "What's your GitHub username?"
+        },
+        {
+            type: "input",
+            name: "about",
+            message: "Tell me a little about yourself."
         }
-    ])
-    .then(answers => console.log(answers));
+    ]);
+    // .then(answers => console.log(answers));
+};
 
 
+// project name, desc, languages used, link
+const promptProject = portfolioData => {
+    if (!portfolioData.projects) {
+        portfolioData.projects = [];
+    };
+    console.log("---------add a new project-------------");
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What's your project name?"
+        },
+        {
+            type: "input",
+            name: "description",
+            message: "What's your project about?"
+        },
+        {
+            type: "checkbox",
+            name: "languages",
+            message: "What did you build this project with?",
+            choices: ["JavaScript", "HTML", "CSS", "ES6", "jQuery", "Bootstrap", "Node"]
+        },
+        {
+            type: "input",
+            name: "link",
+            message: "Enter the GitHub link to your project."
+        },
+        {
+            type: "confirm",
+            name: "feature",
+            message: "Would you like to feature this project?",
+            default: false
+        },
+        {
+            type: "confirm",
+            name: "confirmAddProject",
+            message: "Would you like to enter another project?",
+            default: false
+        }
+    ]).then(projectData => {
+        portfolioData.projects.push(projectData);
+        if (projectData.confirmAddProject) {
+            return promptProject(portfolioData);
+        } else {
+            return portfolioData;
+        }
+    });
+};
+
+
+promptUser()
+    .then(promptProject)
+    .then(portfolioData => console.log(portfolioData));
