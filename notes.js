@@ -74,3 +74,38 @@
     //         </div>
     //     `;
     // });
+
+    // fs.writeFile("./dist/index.html", pageHTML, err => {
+//     if (err) {
+//         console.log(err);
+//         return;
+//     }
+//     console.log("Portfolio complete!");
+
+//     fs.copyFile("./src/style.css", "./dist/style.css", err => {
+//         if (err) {
+//             console.log(err);
+//             return;
+//         }
+//         console.log("Style sheet copied!");
+//     });
+// });
+//     });
+
+// const pageHTML = generatePage(mockData);
+// console.log(pageHTML);
+// fs.writeFile("./dist/index.html", pageHTML, err => {
+//     if (err){
+//         console.log(err);
+//         return;
+//     }
+//     console.log("Portfolio complete!");
+
+//     fs.copyFile("./src/style.css", "./dist/style.css",err=>{
+//         if(err){
+//             console.log(err);
+//             return;
+//         } 
+//         console.log("Style sheet copied!");
+//     });
+// });
